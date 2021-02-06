@@ -13,9 +13,8 @@ class SustainScreen extends StatefulWidget {
 class _SustainScreenState extends State<SustainScreen> {
   ScrollController controller = ScrollController();
   bool closeTopContainer = false;
-  double topContainer = 0;
-
   List<Widget> itemsData = [];
+  double topContainer = 0;
 
   void getPostsData() {
     List<dynamic> responseList = FOOD_DATA;
@@ -27,9 +26,7 @@ class _SustainScreenState extends State<SustainScreen> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(20.0)),
               color: Colors.white,
-              boxShadow: [
-                BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
-              ]),
+          ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
             child: Row(
@@ -78,7 +75,7 @@ class _SustainScreenState extends State<SustainScreen> {
     getPostsData();
     controller.addListener(() {
       setState(() {
-        closeTopContainer = controller.offset > 50;
+        closeTopContainer = controller.offset > 2;
       });
     });
   }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "390693048962",
+    "project_id": "sustain-tracker",
+    "storage_bucket": "sustain-tracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390693048962:android:b0fff8a2812657bdee5a9b",
+        "android_client_info": {
+          "package_name": "com.deneme.sustainable_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "390693048962-cd99k3jbvdqol4fnd4op71a0g3imhtrr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhcCwxH6iW7GALAGYhgfFQqAYKPcbNLR4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "390693048962-cd99k3jbvdqol4fnd4op71a0g3imhtrr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

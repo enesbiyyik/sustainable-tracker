@@ -32,37 +32,29 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(),
+      extendBody: true,
       body: screenList[_index],
       bottomNavigationBar: bottomNavBar(),
     );
   }
-
+//4898e7
   Widget bottomNavBar() {
     return BottomNavigationBar(
       elevation: 0,
       currentIndex: _index,
       showUnselectedLabels: false,
-      backgroundColor: Colors.white.withOpacity(0.5),
+      selectedItemColor: Color(0xff328de6),
+      backgroundColor: Colors.white.withOpacity(0.85),
       items: [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Ana Sayfa"),
+        BottomNavigationBarItem(icon: Icon(Icons.nature_people), label: "Sürdür"),
+        BottomNavigationBarItem(icon: Icon(Icons.not_listed_location_rounded), label: "Öğren"),
       ],
       onTap: (index) {
         setState(() {
           _index = index;
         });
       },
-    );
-  }
-
-  Widget appBar() {
-    return AppBar(
-      elevation: 0,
-      centerTitle: true,
-      backgroundColor: Colors.white,
-      title: Text("Sürdür", style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black),),
     );
   }
 }

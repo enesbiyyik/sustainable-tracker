@@ -17,15 +17,14 @@ class _HomePageState extends State<HomePage> {
   SustainScreen sustainScreen;
   var homeScreenKey = PageStorageKey("1");
   var learnScreenKey = PageStorageKey("2");
-  var sustainScreenKey = PageStorageKey("3");
 
 
   @override
   void initState() {
     super.initState();
+    sustainScreen = SustainScreen();
     homeScreen = HomeScreen(key: homeScreenKey,);
     learnScreen = LearnScreen(key: learnScreenKey);
-    sustainScreen = SustainScreen(key: sustainScreenKey,);
     screenList = [homeScreen, sustainScreen, learnScreen];
   }
 

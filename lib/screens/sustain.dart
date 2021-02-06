@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sustainable_tracker/components/sustainGridItem.dart';
+import 'package:sustainable_tracker/components/sustainDonation.dart';
 
 import '../constant.dart';
 
@@ -11,7 +11,6 @@ class SustainScreen extends StatefulWidget {
 }
 
 class _SustainScreenState extends State<SustainScreen> {
-  final CategoriesScroller categoriesScroller = CategoriesScroller();
   ScrollController controller = ScrollController();
   bool closeTopContainer = false;
   double topContainer = 0;
@@ -87,7 +86,7 @@ class _SustainScreenState extends State<SustainScreen> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    final double categoryHeight = size.height * 0.30;
+    final double categoryHeight = size.height/2;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -100,7 +99,7 @@ class _SustainScreenState extends State<SustainScreen> {
                   width: size.width,
                   alignment: Alignment.topCenter,
                   height: closeTopContainer ? 0 : categoryHeight,
-                  child: categoriesScroller),
+                  child: SustainDonation()),
               Expanded(
                   child: ListView.builder(
                       controller: controller,
@@ -117,16 +116,3 @@ class _SustainScreenState extends State<SustainScreen> {
   }
 }
 
-class CategoriesScroller extends StatelessWidget {
-  const CategoriesScroller();
-
-  @override
-  Widget build(BuildContext context) {
-    final double categoryHeight = MediaQuery.of(context).size.height * 0.30 - 50;
-    return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
-      scrollDirection: Axis.horizontal,
-    
-    );
-  }
-}

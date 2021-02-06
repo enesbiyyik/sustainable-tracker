@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 class SustainDonation extends StatelessWidget {
-  const SustainDonation();
+
+  List basliklar = ["Damla", "Deniz", "Dünya"];
 
   @override
   Widget build(BuildContext context) {
@@ -11,18 +13,31 @@ class SustainDonation extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         return new Container(
           padding: EdgeInsets.all(8),
+          margin: EdgeInsets.only(top: 24),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+            color: Colors.white,
+          ),
           child: Column(
             children: [
               Expanded(
-                flex: 15,
-                child: Image.network("http://via.placeholder.com/288x188", fit: BoxFit.fill,),
+                flex: 18,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    image: DecorationImage(
+                      image: AssetImage("assets/${(index+1)}.png"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
               ),
               Expanded(
                 flex: 3,
                 child: Container(
                   padding: EdgeInsets.only(left: 8),
                   alignment: Alignment.centerLeft,
-                  child: Text("ANAN SUCO", style: TextStyle(fontSize: MediaQuery.of(context).textScaleFactor*24, fontWeight: FontWeight.w600,),),
+                  child: Text(basliklar[index], style: TextStyle(fontSize: MediaQuery.of(context).textScaleFactor*20, fontWeight: FontWeight.w600,),),
                 ),
               ),
               Expanded(
@@ -30,7 +45,7 @@ class SustainDonation extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.only(left: 8),
                   alignment: Alignment.centerLeft,
-                  child: Text("anan suco description", style: TextStyle(fontSize: MediaQuery.of(context).textScaleFactor*16, fontWeight: FontWeight.w400, color: Colors.grey.shade600),),
+                  child: Text("anan suco description", style: TextStyle(fontSize: MediaQuery.of(context).textScaleFactor*12, fontWeight: FontWeight.w400, color: Colors.grey.shade600),),
                 ),
               ),
               Expanded(
@@ -50,6 +65,8 @@ class SustainDonation extends StatelessWidget {
       scale: 0.9,
       viewportFraction: 0.8,
       controller: SwiperController(),
+      autoplay: true,
+      autoplayDelay: 3000,
     );
   }
 }

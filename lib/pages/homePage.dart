@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sustainable_tracker/model/increaseSustainability.dart';
 import 'package:sustainable_tracker/screens/home.dart';
 import 'package:sustainable_tracker/screens/learn.dart';
 import 'package:sustainable_tracker/screens/sustain.dart';
@@ -22,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    getSustainItems();
     sustainScreen = SustainScreen();
     homeScreen = HomeScreen(key: homeScreenKey,);
     learnScreen = LearnScreen(key: learnScreenKey);

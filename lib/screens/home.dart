@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,6 +12,12 @@ class _HomeScreenState extends State<HomeScreen> {
   double yesterdayScore = 20;
   double weeklyAverageScore = 50;
   String userName = "Ömer";
+
+  bool usePlastic = false;
+
+  Duration initialtimer = new Duration();
+  int selectFood = 1;
+  String screenTime;
 
   @override
   Widget build(BuildContext context) {
@@ -86,32 +93,24 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    child: Icon(Icons.settings),
-                    height: 40,
-                    width: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(width: 0),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
+                FlatButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25)),
+                  onPressed: () {},
+                  height: 40,
+                  minWidth: 40,
+                  child: Icon(Icons.settings),
+                  color: Colors.white,
                 ),
                 SizedBox(width: 15),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    child: Icon(Icons.person),
-                    height: 40,
-                    width: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(width: 0),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
+                FlatButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25)),
+                  onPressed: () {},
+                  height: 40,
+                  minWidth: 40,
+                  child: Icon(Icons.person),
+                  color: Colors.white,
                 ),
               ],
             ),
@@ -254,15 +253,13 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
 
           //Increasing Button
-          Container(
-            alignment: Alignment.center,
+          FlatButton(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            onPressed: () {},
             height: 50,
-            width: double.maxFinite,
-            decoration: BoxDecoration(
-              color: Color(0xff328DE6),
-              border: Border.all(color: Color(0xff328DE6), width: 0),
-              borderRadius: BorderRadius.circular(20),
-            ),
+            color: Color(0xff328DE6),
+            minWidth: double.maxFinite,
             child: Text(
               "Sürdürülebilirlik Puanını Arttır",
               style: TextStyle(
@@ -282,12 +279,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return Padding(
       padding: EdgeInsets.fromLTRB(
         MediaQuery.of(context).size.width / 20, //Left
-        MediaQuery.of(context).size.height / 50, //Top
+        MediaQuery.of(context).size.height / 100, //Top
         MediaQuery.of(context).size.width / 20, //Right
-        MediaQuery.of(context).size.height / 20, //Botttom
+        MediaQuery.of(context).size.height / 50, //Botttom
       ),
       child: Container(
-        height: 300,
+        height: 320,
         width: double.maxFinite,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -299,13 +296,14 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               todayDoneTitle(),
+              todayDoneContents(context),
             ],
           ),
         ),
       ),
     );
   }
-  
+
   //Today Done Box-Title
   Widget todayDoneTitle() {
     return Row(
@@ -331,25 +329,210 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         Padding(
           padding: EdgeInsets.only(left: MediaQuery.of(context).size.width / 6),
-          child: InkWell(
-            onTap: () {},
-            child: Container(
-              child: Icon(
-                Icons.add,
-                size: MediaQuery.of(context).size.height / 26.25,
-                color: Colors.white,
-              ),
-              height: MediaQuery.of(context).size.height / 17.5,
-              width: MediaQuery.of(context).size.height / 17.5,
-              decoration: BoxDecoration(
-                  color: Color(0xff328DE6),
-                  border: Border.all(width: 0, color: Color(0xff328DE6)),
-                  borderRadius: BorderRadius.circular(
-                      MediaQuery.of(context).size.height / 17.5)),
+          child: FlatButton(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+            onPressed: () {},
+            height: MediaQuery.of(context).size.height / 17.5,
+            minWidth: MediaQuery.of(context).size.width / 17.5,
+            color: Color(0xff328DE6),
+            child: Icon(
+              Icons.add,
+              size: MediaQuery.of(context).size.height / 30,
+              color: Colors.white,
             ),
           ),
         ),
       ],
+    );
+  }
+
+  //Today Done Box-Content
+  Widget todayDoneContents(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+      child: Column(
+        children: [
+          todayDoneRow1(context),
+          todayDoneRow2(context),
+          todayDoneRow3(context),
+        ],
+      ),
+    );
+  }
+
+  //Today Done Box-Contents FoodType
+  Widget todayDoneRow1(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+      child: ListTile(
+        leading: Container(
+          height: 50,
+          width: 50,
+          child: Icon(Icons.food_bank, size: 30, color: Colors.white),
+          decoration: BoxDecoration(
+              color: Color(0xff45D1FD),
+              border: Border.all(color: Color(0xff45D1FD), width: 0),
+              borderRadius: BorderRadius.circular(10)),
+        ),
+        title: Text("Yemek Türü",
+            textAlign: TextAlign.start,
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
+        trailing: FlatButton(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+          onPressed: () {
+            typePicker(context);
+          },
+          child: Text("Seç",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w900)),
+          height: 30,
+          minWidth: 50,
+          color: Color(0xff45D1FD),
+        ),
+      ),
+    );
+  }
+
+  //Today Done Box-Contents ScreenTime
+  Widget todayDoneRow2(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+      child: ListTile(
+        leading: Container(
+          height: 50,
+          width: 50,
+          child: Icon(Icons.phone, size: 30, color: Colors.white),
+          decoration: BoxDecoration(
+              color: Color(0xff45D1FD),
+              border: Border.all(color: Color(0xff45D1FD), width: 0),
+              borderRadius: BorderRadius.circular(10)),
+        ),
+        title: Text("Ekran Süresi",
+            textAlign: TextAlign.start,
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
+        trailing: FlatButton(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+          onPressed: () {
+            timePicker(context);
+          },
+          child: Text("Seç",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w900,
+              )),
+          height: 30,
+          minWidth: 50,
+          color: Color(0xff45D1FD),
+        ),
+      ),
+    );
+  }
+
+  //Today Done Box-Contents UsePlastic
+  Widget todayDoneRow3(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+      child: ListTile(
+        leading: Container(
+          height: 50,
+          width: 50,
+          child: Icon(Icons.ac_unit, size: 30, color: Colors.white),
+          decoration: BoxDecoration(
+              color: Color(0xff45D1FD),
+              border: Border.all(color: Color(0xff45D1FD), width: 0),
+              borderRadius: BorderRadius.circular(10)),
+        ),
+        title: Text("Plastik Kullanımı",
+            textAlign: TextAlign.start,
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
+        // SizedBox(width: MediaQuery.of(context).size.width / 12.5),
+        trailing: Checkbox(
+          value: usePlastic,
+          onChanged: (change) {
+            setState(() {
+              usePlastic = change;
+            });
+          },
+        ),
+      ),
+    );
+  }
+
+  Future typePicker(BuildContext context, {double height}) {
+    return showModalBottomSheet(
+      isScrollControlled: false,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(13), topRight: Radius.circular(13))),
+      backgroundColor: Colors.white,
+      context: context,
+      builder: (context) => Container(
+        height: height ?? MediaQuery.of(context).size.height / 3,
+        child: Container(
+          child: CupertinoPicker(
+            magnification: 1.1,
+            backgroundColor: Colors.white,
+            children: <Widget>[
+              Container(
+                child: Text("Yağlı", style: TextStyle()),
+                alignment: Alignment.center,
+              ),
+              Container(
+                child: Text("Çorba", style: TextStyle()),
+                alignment: Alignment.center,
+              ),
+              Container(
+                child: Text("Sucuk", style: TextStyle()),
+                alignment: Alignment.center,
+              ),
+            ],
+            itemExtent: 50, //height of each item
+            looping: false,
+            onSelectedItemChanged: (int index) {
+              selectFood = index;
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future timePicker(BuildContext context, {double height}) {
+    return showModalBottomSheet(
+      isScrollControlled: false,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(13), topRight: Radius.circular(13))),
+      backgroundColor: Colors.white,
+      context: context,
+      builder: (context) => Container(
+        height: height ?? MediaQuery.of(context).size.height / 3,
+        child: CupertinoTimerPicker(
+          mode: CupertinoTimerPickerMode.hms,
+          minuteInterval: 1,
+          secondInterval: 1,
+          initialTimerDuration: initialtimer,
+          onTimerDurationChanged: (Duration changedtimer) {
+            setState(
+              () {
+                initialtimer = changedtimer;
+                screenTime = changedtimer.inHours.toString() +
+                    ' hrs ' +
+                    (changedtimer.inMinutes % 60).toString() +
+                    ' mins ' +
+                    (changedtimer.inSeconds % 60).toString() +
+                    ' secs';
+              },
+            );
+          },
+        ),
+      ),
     );
   }
 }

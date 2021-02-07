@@ -8,15 +8,72 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+
+
   double todaySliderValue = 15;
   double yesterdayScore = 20;
   double weeklyAverageScore = 50;
 
   bool usePlastic = false;
 
-  Duration initialtimer = new Duration();
-  int selectFood = 1;
-  String screenTime;
+  int selectFood = 0;
+  int selectTime = 0;
+  int selectNumber = 0;
+
+  List number = [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+  ];
+
+  List<String> time = [
+    "0 dakika",
+    "15 dakika",
+    "30 dakika",
+    "45 dakika",
+    "1 saat",
+    "2 saat",
+    "4 saat",
+    "5 saat",
+    "6 saat",
+    "7 saat",
+    "8 saat",
+    "9 saat",
+    "10 saat",
+    "11 saat",
+    "12 saat",
+    "13 saat",
+    "14 saat",
+    "15 saat",
+    "16 saat",
+    "17 saat",
+    "18 saat",
+    "19 saat",
+    "20 saat",
+    "21 saat",
+    "22 saat",
+    "23 saat",
+    "24 saat",
+  ];
+
+  List<String> foodType = [
+    "Vegan",
+    "Vejertaryen",
+    "Peskotaryen",
+    "Az Et",
+    "Orta Et",
+    "Çok Et",
+  ];
+  String foodTitle = "";
 
   @override
   Widget build(BuildContext context) {
@@ -254,7 +311,7 @@ class _HomeScreenState extends State<HomeScreen> {
           //Increasing Button
           FlatButton(
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             onPressed: () {},
             height: 50,
             color: Color(0xff328DE6),
@@ -283,7 +340,7 @@ class _HomeScreenState extends State<HomeScreen> {
         MediaQuery.of(context).size.height / 50, //Botttom
       ),
       child: Container(
-        height: 320,
+        height: 630,
         width: double.maxFinite,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -330,7 +387,7 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: EdgeInsets.only(left: MediaQuery.of(context).size.width / 6),
           child: FlatButton(
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
             onPressed: () {},
             height: MediaQuery.of(context).size.height / 17.5,
             minWidth: MediaQuery.of(context).size.width / 17.5,
@@ -352,16 +409,20 @@ class _HomeScreenState extends State<HomeScreen> {
       padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
       child: Column(
         children: [
-          todayDoneRow1(context),
-          todayDoneRow2(context),
-          todayDoneRow3(context),
+          tdFoodType(context),
+          tdScreenTime(context),
+          tdPlasticUse(context),
+          tdGetOrder(context),
+          tdGetMedicine(context),
+          tdShopping(context),
+          tdGetPaper(context),
         ],
       ),
     );
   }
 
   //Today Done Box-Contents FoodType
-  Widget todayDoneRow1(BuildContext context) {
+  Widget tdFoodType(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
       child: ListTile(
@@ -378,26 +439,28 @@ class _HomeScreenState extends State<HomeScreen> {
             textAlign: TextAlign.start,
             style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
         trailing: FlatButton(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-          onPressed: () {
-            typePicker(context);
-          },
-          child: Text("Seç",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w900)),
-          height: 30,
-          minWidth: 50,
-          color: Color(0xff45D1FD),
-        ),
+            shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            onPressed: () {
+              foodTypePicker(context);
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text("${foodType[selectFood]}", style: TextStyle(color: Colors.black)),
+                Text("Edit"),
+              ],
+            ),
+            height: 10,
+            minWidth: 10,
+            color: Colors.black12),
       ),
     );
   }
 
   //Today Done Box-Contents ScreenTime
-  Widget todayDoneRow2(BuildContext context) {
+  Widget tdScreenTime(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
       child: ListTile(
@@ -415,26 +478,28 @@ class _HomeScreenState extends State<HomeScreen> {
             style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
         trailing: FlatButton(
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           onPressed: () {
             timePicker(context);
           },
-          child: Text("Seç",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.w900,
-              )),
-          height: 30,
-          minWidth: 50,
-          color: Color(0xff45D1FD),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text("${time[selectTime]}", style: TextStyle(color: Colors.black)),
+              Text("Edit"),
+            ],
+          ),
+          height: 10,
+          minWidth: 10,
+          color: Colors.black12,
         ),
       ),
     );
   }
 
   //Today Done Box-Contents UsePlastic
-  Widget todayDoneRow3(BuildContext context) {
+  Widget tdPlasticUse(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
       child: ListTile(
@@ -463,7 +528,160 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Future typePicker(BuildContext context, {double height}) {
+  // Today Done Box-Contents GetOrder
+  Widget tdGetOrder(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+      child: ListTile(
+        leading: Container(
+          height: 50,
+          width: 50,
+          child: Icon(Icons.food_bank, size: 30, color: Colors.white),
+          decoration: BoxDecoration(
+              color: Color(0xff45D1FD),
+              border: Border.all(color: Color(0xff45D1FD), width: 0),
+              borderRadius: BorderRadius.circular(10)),
+        ),
+        title: Text("Yemek Siparişi",
+            textAlign: TextAlign.start,
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
+        trailing: FlatButton(
+            shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            onPressed: () {
+              numberPicker(context);
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text("1", style: TextStyle(color: Colors.black)),
+                Text("Edit"),
+              ],
+            ),
+            height: 10,
+            minWidth: 10,
+            color: Colors.black12),
+      ),
+    );
+  }
+
+  // Today Done Box-Contents GetMedicine
+  Widget tdGetMedicine(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+      child: ListTile(
+        leading: Container(
+          height: 50,
+          width: 50,
+          child: Icon(Icons.food_bank, size: 30, color: Colors.white),
+          decoration: BoxDecoration(
+              color: Color(0xff45D1FD),
+              border: Border.all(color: Color(0xff45D1FD), width: 0),
+              borderRadius: BorderRadius.circular(10)),
+        ),
+        title: Text("İlaç",
+            textAlign: TextAlign.start,
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
+        trailing: FlatButton(
+            shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            onPressed: () {
+              numberPicker(context);
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text("1", style: TextStyle(color: Colors.black)),
+                Text("Edit"),
+              ],
+            ),
+            height: 10,
+            minWidth: 10,
+            color: Colors.black12),
+      ),
+    );
+  }
+
+  // Today Done Box-Contents GetOrder
+  Widget tdShopping(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+      child: ListTile(
+        leading: Container(
+          height: 50,
+          width: 50,
+          child: Icon(Icons.food_bank, size: 30, color: Colors.white),
+          decoration: BoxDecoration(
+              color: Color(0xff45D1FD),
+              border: Border.all(color: Color(0xff45D1FD), width: 0),
+              borderRadius: BorderRadius.circular(10)),
+        ),
+        title: Text("Kıyafet Alışverişi",
+            textAlign: TextAlign.start,
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
+        trailing: FlatButton(
+            shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            onPressed: () {
+              numberPicker(context);
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text("1", style: TextStyle(color: Colors.black)),
+                Text("Edit"),
+              ],
+            ),
+            height: 10,
+            minWidth: 10,
+            color: Colors.black12),
+      ),
+    );
+  }
+
+  // Today Done Box-Contents GetOrder
+  Widget tdGetPaper(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+      child: ListTile(
+        leading: Container(
+          height: 50,
+          width: 50,
+          child: Icon(Icons.food_bank, size: 30, color: Colors.white),
+          decoration: BoxDecoration(
+              color: Color(0xff45D1FD),
+              border: Border.all(color: Color(0xff45D1FD), width: 0),
+              borderRadius: BorderRadius.circular(10)),
+        ),
+        title: Text("Kağıt Almak",
+            textAlign: TextAlign.start,
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
+        trailing: FlatButton(
+            shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            onPressed: () {
+              numberPicker(context);
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text("1", style: TextStyle(color: Colors.black)),
+                Text("Edit"),
+              ],
+            ),
+            height: 10,
+            minWidth: 10,
+            color: Colors.black12),
+      ),
+    );
+  }
+
+
+  Future numberPicker(BuildContext context, {double height}) {
     return showModalBottomSheet(
       isScrollControlled: false,
       shape: RoundedRectangleBorder(
@@ -474,27 +692,18 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context) => Container(
         height: height ?? MediaQuery.of(context).size.height / 3,
         child: Container(
-          child: CupertinoPicker(
-            magnification: 1.1,
+          child: CupertinoPicker.builder(
+            childCount: number.length,
+            itemBuilder: (context, index){
+              return Center(child: Text(number[index]));
+            },
+            magnification: 1,
             backgroundColor: Colors.white,
-            children: <Widget>[
-              Container(
-                child: Text("Yağlı", style: TextStyle()),
-                alignment: Alignment.center,
-              ),
-              Container(
-                child: Text("Çorba", style: TextStyle()),
-                alignment: Alignment.center,
-              ),
-              Container(
-                child: Text("Sucuk", style: TextStyle()),
-                alignment: Alignment.center,
-              ),
-            ],
-            itemExtent: 50, //height of each item
-            looping: false,
+            itemExtent: 50,
             onSelectedItemChanged: (int index) {
-              selectFood = index;
+              setState(() {
+                selectNumber = index;
+              });
             },
           ),
         ),
@@ -512,26 +721,54 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       builder: (context) => Container(
         height: height ?? MediaQuery.of(context).size.height / 3,
-        child: CupertinoTimerPicker(
-          mode: CupertinoTimerPickerMode.hms,
-          minuteInterval: 1,
-          secondInterval: 1,
-          initialTimerDuration: initialtimer,
-          onTimerDurationChanged: (Duration changedtimer) {
-            setState(
-              () {
-                initialtimer = changedtimer;
-                screenTime = changedtimer.inHours.toString() +
-                    ' hrs ' +
-                    (changedtimer.inMinutes % 60).toString() +
-                    ' mins ' +
-                    (changedtimer.inSeconds % 60).toString() +
-                    ' secs';
-              },
-            );
-          },
+        child: Container(
+          child: CupertinoPicker.builder(
+            childCount: time.length,
+            itemBuilder: (context, index){
+              return Center(child: Text(time[index]));
+            },
+            magnification: 1,
+            backgroundColor: Colors.white,
+            itemExtent: 50,
+            onSelectedItemChanged: (int index) {
+              setState(() {
+                selectTime = index;
+              });
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future foodTypePicker(BuildContext context, {double height}) {
+    return showModalBottomSheet(
+      isScrollControlled: false,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(13), topRight: Radius.circular(13))),
+      backgroundColor: Colors.white,
+      context: context,
+      builder: (context) => Container(
+        height: height ?? MediaQuery.of(context).size.height / 3,
+        child: Container(
+          child: CupertinoPicker.builder(
+            childCount: foodType.length,
+            itemBuilder: (context, index){
+              return Center(child: Text(foodType[index]));
+            },
+            magnification: 1,
+            backgroundColor: Colors.white,
+            itemExtent: 50,
+            onSelectedItemChanged: (int index) {
+              setState(() {
+                selectFood = index;
+              });
+            },
+          ),
         ),
       ),
     );
   }
 }
+

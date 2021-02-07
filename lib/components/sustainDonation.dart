@@ -5,6 +5,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 class SustainDonation extends StatelessWidget {
 
   List basliklar = ["Damla", "Deniz", "Dünya"];
+  List description = ["2.99 bağışlayarak tüm haftanıza yansıyacak 10 puan kazanabilirsiniz!", "4.99 bağışlayarak tüm haftanıza yansıyacak 30 puan kazanabilirsiniz!", "9.99 bağışlayarak tüm haftanıza yansıyacak 100 puan kazanabilirsiniz!"];
 
   @override
   Widget build(BuildContext context) {
@@ -41,11 +42,11 @@ class SustainDonation extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 2,
+                flex: 3,
                 child: Container(
                   padding: EdgeInsets.only(left: 8),
                   alignment: Alignment.centerLeft,
-                  child: Text("anan suco description", style: TextStyle(fontSize: MediaQuery.of(context).textScaleFactor*12, fontWeight: FontWeight.w400, color: Colors.grey.shade600),),
+                  child: Text(description[index], style: TextStyle(fontSize: MediaQuery.of(context).textScaleFactor*10, fontWeight: FontWeight.w400, color: Colors.grey.shade600),),
                 ),
               ),
               Expanded(

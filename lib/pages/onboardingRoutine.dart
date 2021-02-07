@@ -28,9 +28,9 @@ class _RoutinePickerState extends State<RoutinePicker> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.navigate_next, size: 36),
         onPressed: () {
-          //Navigator.pushReplacement(context, new MaterialPageRoute(builder: (context) => HomePage()));
+          Navigator.pushReplacement(context, new MaterialPageRoute(builder: (context) => HomePage()));
           hesapla();
-          
+          debugPrint(dusulcekPuan.toString());
           debugPrint(pc.toString());
           debugPrint(isikTuru.toString());
           debugPrint(isik.toString());
@@ -47,7 +47,7 @@ class _RoutinePickerState extends State<RoutinePicker> {
           Positioned.fill(
             child: Container(
               padding: EdgeInsets.only(
-                top: 40,
+                top: 60,
                 left: 18,
               ),
               child: Text(

@@ -1,58 +1,118 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:sustainable_tracker/services/auth.dart';
 
-class OnBoarding extends StatelessWidget {
+class SignUp extends StatefulWidget {
+  @override
+  _SignUpState createState() => _SignUpState();
+}
 
-  List headers = ["Takip Et", "Sürdür", "Arttır"];
-  List descriptions = ["Her gün yaptıklarını girerek ne kadar sürdürülebilir olduğunu öğren!", "Hayatını sürdürülebilir kılmak için yapman gerekenleri uygulama içinden öğren!", "Sürdürülebilir bir yaşam için kullanacağın ürünleri değiştir. Sürdürülebilirlik açığını kapatmak için doğru ürünlere ulaş!"];
+class _SignUpState extends State<SignUp> {
+
+  final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+  String error = '';
+
+  // text field state
+  String email = '';
+  String password = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffdff8ff),
-      body: new Swiper(
-        itemBuilder: (BuildContext context, int index) {
-          return new Column(
-            children: [
-              Expanded(
-                flex: 7,
-                child: Container(
-                  margin: EdgeInsets.fromLTRB(30, 50, 30, 0),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/${(index+1)}.png"),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  tileMode: TileMode.mirror,
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [const Color(0xff276375), const Color(0xff050D10)],
+                ),
+              ),
+            ),
+          ),
+          Positioned.fill(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.all(80),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/onboard_logo.png"),
+                        fit: BoxFit.contain,
+                      )
                     ),
                   ),
                 ),
-              ),
-              Expanded(
-                flex: 5,
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.fromLTRB(20, 20, 20, 10),
-                  padding: EdgeInsets.all(18),
-                  decoration: BoxDecoration(
-                    color: Color(0xff3867fe),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 30,),
-                      Text(headers[index], style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: MediaQuery.of(context).textScaleFactor*24),),
-                      SizedBox(height: 30,),
-                      Text(descriptions[index], style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: MediaQuery.of(context).textScaleFactor*18),),
-                    ],
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(topLeft: Radius.circular(45), topRight: Radius.circular(45)),
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.all(20),
+                      child: Column(
+                        children: [
+                          Form(
+                            key: _formKey,
+                            child: Column(
+                              children: <Widget>[
+                                SizedBox(height: 20.0),
+                                TextFormField(
+                                  validator: (val) => val.isEmpty ? 'Bu alan boş bırakılamaz!' : null,
+                                  onChanged: (val) {
+                                    setState(() => email = val);
+                                  },
+                                ),
+                                SizedBox(height: 20.0),
+                                TextFormField(
+                                  obscureText: true,
+                                  validator: (val) => val.length < 6 ? 'Lütfen en az 6 karakter giriniz!' : null,
+                                  onChanged: (val) {
+                                    setState(() => password = val);
+                                  },
+                                ),
+                                SizedBox(height: 20.0),
+                                RaisedButton(
+                                    color: Colors.pink[400],
+                                    child: Text(
+                                      'Kaydol',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    onPressed: () async {
+                                      if(_formKey.currentState.validate()){
+                                        dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                                          if(result == null) {
+                                            setState(() {
+                                              error = 'Could not sign in with those credentials';
+                                            });
+                                          }
+                                        }
+                                    }
+                                ),
+                                SizedBox(height: 12.0),
+                                Text(
+                                  error,
+                                  style: TextStyle(color: Colors.red, fontSize: 14.0),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ],
-          );
-        },
-        itemCount: 3,
-        pagination: SwiperPagination(),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 }
-//3867fe
+//27637s

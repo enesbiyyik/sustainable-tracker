@@ -88,17 +88,21 @@ class _OnBoardingState extends State<OnBoarding> {
                       SizedBox(
                         height: 20,
                       ),
-                      FlatButton(
-                        onPressed: () {
-                          if (index == 2) {
-                            Navigator.pushReplacement(context, new MaterialPageRoute(builder: (context) => SignUp()));
-                          } else {
-                            setState(() {
-                              controller.animateToPage(index + 1, duration: Duration(milliseconds: 500), curve: Curves.easeIn);
-                            });
-                          }
-                        },
-                        child: null,
+                      Container(
+                        width: double.maxFinite,
+                        child: FlatButton(
+                          color: Colors.white,
+                          onPressed: () {
+                            if (index == 2) {
+                              Navigator.pushReplacement(context, new MaterialPageRoute(builder: (context) => SignUp()));
+                            } else {
+                              setState(() {
+                                controller.animateToPage(index + 1, duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+                              });
+                            }
+                          },
+                          child: Text("Devam"),
+                        ),
                       ),
                     ],
                   ),

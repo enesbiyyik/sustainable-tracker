@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SustainListItem extends StatelessWidget {
   final String url;
@@ -33,7 +34,9 @@ class SustainListItem extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         FlatButton(
-                          onPressed: (){},
+                          onPressed: (){
+                            launchShop(url);
+                          },
                           child: Text("Satın Al", style: TextStyle(color: Colors.white),),
                           color: Color(0xff4ca973),
                         ),
@@ -66,5 +69,13 @@ class SustainListItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> launchShop(String link) async {
+      await launch(
+        link,
+        forceSafariVC: true,
+        forceWebView: true,
+      );
   }
 }

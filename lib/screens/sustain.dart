@@ -3,7 +3,6 @@ import 'package:sustainable_tracker/components/sustainDonation.dart';
 import 'package:sustainable_tracker/model/increaseSustainability.dart';
 import 'package:sustainable_tracker/components/sustainListItem.dart';
 
-import '../constant.dart';
 
 class SustainScreen extends StatefulWidget {
   SustainScreen({Key key}) : super(key: key);

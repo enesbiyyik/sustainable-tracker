@@ -1,9 +1,8 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sustainable_tracker/pages/routinePage.dart';
 import 'package:sustainable_tracker/services/auth.dart';
+
+import 'onboardingRoutine.dart';
 
 class SignUp extends StatefulWidget {
   @override

@@ -11,7 +11,6 @@ class _HomeScreenState extends State<HomeScreen> {
   double todaySliderValue = 15;
   double yesterdayScore = 20;
   double weeklyAverageScore = 50;
-  String userName = "Ömer";
 
   bool usePlastic = false;
 
@@ -80,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             flex: 1,
             child: Text(
-              "Selam $userName",
+              "Hoş Geldiniz!",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 28,

@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sustainable_tracker/components/pickerListTile.dart';
+import 'package:sustainable_tracker/pages/dailyRoutine.dart';
+import 'package:sustainable_tracker/pages/onboardingRoutine.dart';
+
+import '../constants.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -10,9 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-
-
-  double todaySliderValue = 15;
+  double todaySliderValue = 100 - dusulcekPuan;
   double yesterdayScore = 20;
   double weeklyAverageScore = 50;
 
@@ -22,58 +24,11 @@ class _HomeScreenState extends State<HomeScreen> {
   int selectTime = 0;
   int selectNumber = 0;
 
-  List number = [
-    "0",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-  ];
-
-  List<String> time = [
-    "0 dakika",
-    "15 dakika",
-    "30 dakika",
-    "45 dakika",
-    "1 saat",
-    "2 saat",
-    "4 saat",
-    "5 saat",
-    "6 saat",
-    "7 saat",
-    "8 saat",
-    "9 saat",
-    "10 saat",
-    "11 saat",
-    "12 saat",
-    "13 saat",
-    "14 saat",
-    "15 saat",
-    "16 saat",
-    "17 saat",
-    "18 saat",
-    "19 saat",
-    "20 saat",
-    "21 saat",
-    "22 saat",
-    "23 saat",
-    "24 saat",
-  ];
-
-  List<String> foodType = [
-    "Vegan",
-    "Vejertaryen",
-    "Peskotaryen",
-    "Az Et",
-    "Orta Et",
-    "Çok Et",
-  ];
+  @override
+  void initState() {
+    super.initState();
+    debugPrint(dusulcekPuan.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -340,7 +295,7 @@ class _HomeScreenState extends State<HomeScreen> {
         MediaQuery.of(context).size.height / 50, //Botttom
       ),
       child: Container(
-        height: 330,
+        height: 280,
         width: double.maxFinite,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -388,7 +343,9 @@ class _HomeScreenState extends State<HomeScreen> {
           child: FlatButton(
             shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => DailyRoutinePicker()));
+            },
             height: MediaQuery.of(context).size.height / 17.5,
             minWidth: MediaQuery.of(context).size.width / 17.5,
             color: Color(0xff328DE6),

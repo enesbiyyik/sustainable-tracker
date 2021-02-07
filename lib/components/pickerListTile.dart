@@ -35,7 +35,7 @@ class _PickerListTileState extends State<PickerListTile> {
             shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             onPressed: () {
-              return showModalBottomSheet(
+              showModalBottomSheet(
                 isScrollControlled: false,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
@@ -53,6 +53,7 @@ class _PickerListTileState extends State<PickerListTile> {
                       magnification: 1,
                       backgroundColor: Colors.white,
                       itemExtent: 50,
+                      
                       onSelectedItemChanged: (int index) {
                         setState(() {
                           widget.select = index;
@@ -68,7 +69,7 @@ class _PickerListTileState extends State<PickerListTile> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text("${widget.list[widget.select]}", style: TextStyle(color: Colors.black)),
-                Text("Edit"),
+                Text("Düzenle"),
               ],
             ),
             height: 10,

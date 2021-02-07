@@ -26,8 +26,7 @@ class _HomePageState extends State<HomePage> {
     getSustainItems();
     sustainScreen = SustainScreen();
     homeScreen = HomeScreen(key: homeScreenKey,);
-    learnScreen = LearnScreen(key: learnScreenKey);
-    screenList = [homeScreen, sustainScreen, learnScreen];
+    screenList = [homeScreen, sustainScreen];
   }
 
   @override
@@ -49,7 +48,6 @@ class _HomePageState extends State<HomePage> {
       items: [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: "Ana Sayfa"),
         BottomNavigationBarItem(icon: Icon(Icons.nature_people), label: "Sürdür"),
-        BottomNavigationBarItem(icon: Icon(Icons.not_listed_location_rounded), label: "Öğren"),
       ],
       onTap: (index) {
         setState(() {
